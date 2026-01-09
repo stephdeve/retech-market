@@ -46,7 +46,11 @@ RUN apk add --no-cache \
     zip \
     unzip \
     git \
-    curl
+    curl \
+    autoconf \
+    g++ \
+    make \
+    linux-headers
 
 # Configurer et installer l'extension GD
 RUN docker-php-ext-configure gd \
