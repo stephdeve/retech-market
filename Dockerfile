@@ -35,6 +35,7 @@ FROM php:8.3-fpm-alpine
 
 # Installer les dépendances système nécessaires
 RUN apk add --no-cache \
+    nginx \
     mysql-client \
     libpng-dev \
     freetype-dev \
@@ -85,12 +86,20 @@ COPY --from=composer /app/vendor ./vendor
 COPY --from=frontend /app/public/build ./public/build
 COPY . .
 
+# Copier le script d'entrypoint Railway
+COPY docker/railway-entrypoint.sh /usr/local/bin/railway-entrypoint.sh
+RUN chmod +x /usr/local/bin/railway-entrypoint.sh
+
 # Permissions
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html/storage \
     && chmod -R 755 /var/www/html/bootstrap/cache
 
-# Exposer le port PHP-FPM
-EXPOSE 9000
+# Créer le répertoire pour Nginx
+RUN mkdir -p /run/nginx
 
-CMD ["php-fpm"]
+# Exposer le port dynamique de Railway (défini via $PORT)
+EXPOSE 8080
+
+# Utiliser le script d'entrypoint
+CMD ["/usr/local/bin/railway-entrypoint.sh"]
