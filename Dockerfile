@@ -1,6 +1,8 @@
-# --------------------------
-# Stage 1: Composer dependencies
-# --------------------------
+# Multi-stage Dockerfile pour Laravel
+
+# -------------------------
+# Stage 1: Composer / PHP dependencies
+# -------------------------
 FROM composer:2.7 AS composer
 
 WORKDIR /app
@@ -11,9 +13,9 @@ RUN composer install --no-dev --no-scripts --no-autoloader --prefer-dist
 COPY . .
 RUN composer dump-autoload --optimize --no-dev
 
-# --------------------------
-# Stage 2: Frontend build
-# --------------------------
+# -------------------------
+# Stage 2: Frontend assets (Tailwind / Vite)
+# -------------------------
 FROM node:20-alpine AS frontend
 
 WORKDIR /app
@@ -26,17 +28,16 @@ COPY --from=composer /app/vendor ./vendor
 
 RUN npm run build
 
-# --------------------------
-# Stage 3: Production runtime
-# --------------------------
+# -------------------------
+# Stage 3: PHP-FPM production
+# -------------------------
 FROM php:8.3-fpm-alpine
 
-# Install system dependencies
+# Installer dépendances système
 RUN apk add --no-cache \
     nginx \
     supervisor \
     mysql-client \
-    postgresql-client \
     zip \
     unzip \
     git \
@@ -49,14 +50,13 @@ RUN apk add --no-cache \
     oniguruma-dev \
     jpegoptim optipng pngquant gifsicle
 
-# Configure and install PHP extensions
+# Installer extensions PHP
 RUN docker-php-ext-configure gd \
         --with-freetype=/usr/include/ \
         --with-jpeg=/usr/include/ \
         --with-webp=/usr/include/ \
     && docker-php-ext-install -j$(nproc) \
         pdo_mysql \
-        pdo_pgsql \
         mbstring \
         exif \
         pcntl \
@@ -64,29 +64,29 @@ RUN docker-php-ext-configure gd \
         gd \
         zip
 
-# Install Redis extension
+# Installer Redis si nécessaire
 RUN pecl install redis && docker-php-ext-enable redis
 
-# Copy Composer from stage 1
+# Copier Composer depuis l'image composer
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
-# Set working directory
+# Définir le répertoire de travail
 WORKDIR /var/www/html
 
-# Copy application files
+# Copier les fichiers de l'application
 COPY --from=composer /app/vendor ./vendor
 COPY --from=frontend /app/public/build ./public/build
 COPY . .
 
-# Set permissions
+# Permissions
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html/storage \
     && chmod -R 755 /var/www/html/bootstrap/cache
 
-# Copy PHP configuration
-COPY docker/php/php.ini /usr/local/etc/php/conf.d/app.ini
+# Copier configuration PHP personnalisée si nécessaire
+# COPY docker/php/php.ini /usr/local/etc/php/conf.d/app.ini
 
-# Expose port 9000 for PHP-FPM
+# Exposer le port PHP-FPM
 EXPOSE 9000
 
 CMD ["php-fpm"]
