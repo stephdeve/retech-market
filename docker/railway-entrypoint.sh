@@ -10,15 +10,24 @@ if [ -z "$APP_KEY" ] || [ "$APP_KEY" = "base64:CHANGEME" ]; then
     php artisan key:generate --force
 fi
 
+# Publish Livewire assets (JS/CSS)
+echo "📦 Publishing Livewire assets..."
+php artisan livewire:publish --force
+
 # Run migrations
 echo "📊 Running database migrations..."
 php artisan migrate --force --no-interaction
+
+# Clear all caches first
+echo "🧹 Clearing caches..."
+php artisan optimize:clear
 
 # Cache configuration for performance
 echo "⚡ Caching configuration..."
 php artisan config:cache
 php artisan route:cache
 php artisan view:cache
+php artisan event:cache
 
 # Create storage link
 echo "🔗 Creating storage symlink..."
