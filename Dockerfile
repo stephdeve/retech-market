@@ -33,35 +33,42 @@ RUN npm run build
 # -------------------------
 FROM php:8.3-fpm-alpine
 
-# Installer les dépendances système nécessaires et extensions PHP
+# Installer les dépendances système nécessaires
 RUN apk add --no-cache \
-        mysql-client \
-        libpng-dev \
-        freetype-dev \
-        libjpeg-turbo-dev \
-        libwebp-dev \
-        zlib-dev \
-        oniguruma-dev \
-        zip \
-        unzip \
-        git \
-        curl \
-        jpegoptim optipng pngquant gifsicle \
-    && docker-php-ext-configure gd \
-        --with-freetype=/usr/include/ \
-        --with-jpeg=/usr/include/ \
-        --with-webp=/usr/include/ \
-    && docker-php-ext-install -j$(nproc) \
-        pdo_mysql \
-        mbstring \
-        exif \
-        pcntl \
-        bcmath \
-        gd \
-        zip \
-    && pecl install redis \
-    && docker-php-ext-enable redis \
-    && rm -rf /var/cache/apk/* /tmp/*
+    mysql-client \
+    libpng-dev \
+    freetype-dev \
+    libjpeg-turbo-dev \
+    libwebp-dev \
+    zlib-dev \
+    oniguruma-dev \
+    libzip-dev \
+    zip \
+    unzip \
+    git \
+    curl
+
+# Configurer et installer l'extension GD
+RUN docker-php-ext-configure gd \
+    --with-freetype=/usr/include/ \
+    --with-jpeg=/usr/include/ \
+    --with-webp=/usr/include/
+
+# Installer les extensions PHP
+RUN docker-php-ext-install -j$(nproc) \
+    pdo_mysql \
+    mbstring \
+    exif \
+    pcntl \
+    bcmath \
+    gd \
+    zip
+
+# Installer Redis via PECL
+RUN pecl install redis && docker-php-ext-enable redis
+
+# Nettoyer le cache
+RUN rm -rf /var/cache/apk/* /tmp/*
 
 # Copier Composer depuis l'image composer
 COPY --from=composer /usr/bin/composer /usr/bin/composer
