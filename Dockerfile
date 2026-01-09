@@ -1,13 +1,15 @@
-# Multi-stage Dockerfile pour Laravel
-
 # -------------------------
 # Stage 1: Composer / PHP dependencies
 # -------------------------
 FROM composer:2.7 AS composer
 
 WORKDIR /app
+
+# Copier les fichiers de dépendances et installer les packages PHP
 COPY composer.json composer.lock ./
 RUN composer install --no-dev --no-scripts --no-autoloader --prefer-dist
+
+# Copier tout le projet pour générer l'autoload optimisé
 COPY . .
 RUN composer dump-autoload --optimize --no-dev
 
@@ -17,10 +19,13 @@ RUN composer dump-autoload --optimize --no-dev
 FROM node:20-alpine AS frontend
 
 WORKDIR /app
+
 COPY package*.json ./
 RUN npm ci
+
 COPY . .
 COPY --from=composer /app/vendor ./vendor
+
 RUN npm run build
 
 # -------------------------
@@ -28,7 +33,7 @@ RUN npm run build
 # -------------------------
 FROM php:8.3-fpm-alpine
 
-# Installer dépendances système et extensions PHP
+# Installer les dépendances système nécessaires et extensions PHP
 RUN apk add --no-cache \
         mysql-client \
         libpng-dev \
@@ -55,7 +60,8 @@ RUN apk add --no-cache \
         gd \
         zip \
     && pecl install redis \
-    && docker-php-ext-enable redis
+    && docker-php-ext-enable redis \
+    && rm -rf /var/cache/apk/* /tmp/*
 
 # Copier Composer depuis l'image composer
 COPY --from=composer /usr/bin/composer /usr/bin/composer
@@ -63,7 +69,7 @@ COPY --from=composer /usr/bin/composer /usr/bin/composer
 # Définir le répertoire de travail
 WORKDIR /var/www/html
 
-# Copier les fichiers de l'application
+# Copier fichiers de l'application + vendor + assets buildés
 COPY --from=composer /app/vendor ./vendor
 COPY --from=frontend /app/public/build ./public/build
 COPY . .
