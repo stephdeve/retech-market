@@ -12,7 +12,7 @@ fi
 
 # Publish Livewire assets (JS/CSS)
 echo "📦 Publishing Livewire assets..."
-php artisan livewire:publish --force
+php artisan livewire:publish || echo "⚠️  Livewire publish skipped"
 
 # Run migrations
 echo "📊 Running database migrations..."
