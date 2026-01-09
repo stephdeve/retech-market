@@ -20,6 +20,14 @@ FROM node:20-alpine AS frontend
 
 WORKDIR /app
 
+# Build arguments pour les variables Vite
+ARG VITE_PUSHER_APP_KEY
+ARG VITE_PUSHER_APP_CLUSTER
+
+# Les rendre disponibles pendant le build
+ENV VITE_PUSHER_APP_KEY=$VITE_PUSHER_APP_KEY
+ENV VITE_PUSHER_APP_CLUSTER=$VITE_PUSHER_APP_CLUSTER
+
 COPY package*.json ./
 RUN npm ci
 

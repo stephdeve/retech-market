@@ -1,2 +1,15 @@
-# Railway configuration
-RAILWAY_STATIC_URL=true
+# Railway Build Configuration
+
+[build]
+  # Pass Vite environment variables to Docker build
+  # These are needed at BUILD TIME, not just runtime
+  buildCommand = "echo 'Building with Vite variables...'"
+
+[build.buildArgs]
+  VITE_PUSHER_APP_KEY = "$PUSHER_APP_KEY"
+  VITE_PUSHER_APP_CLUSTER = "$PUSHER_APP_CLUSTER"
+
+[deploy]
+  startCommand = "/usr/local/bin/railway-entrypoint.sh"
+  healthcheckPath = "/"
+  healthcheckTimeout = 100
