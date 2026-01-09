@@ -84,6 +84,7 @@ WORKDIR /var/www/html
 # Copier fichiers de l'application + vendor + assets buildés
 COPY --from=composer /app/vendor ./vendor
 COPY --from=frontend /app/public/build ./public/build
+COPY --from=frontend /app/public/.vite ./public/.vite
 COPY . .
 
 # Copier le script d'entrypoint Railway
