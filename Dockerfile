@@ -94,6 +94,9 @@ COPY --from=composer /app/vendor ./vendor
 COPY --from=frontend /app/public/build ./public/build
 COPY . .
 
+# Publier les assets Livewire (JS/CSS) pendant le build
+RUN php artisan vendor:publish --tag=livewire:assets --force
+
 # Copier le script d'entrypoint Railway
 COPY docker/railway-entrypoint.sh /usr/local/bin/railway-entrypoint.sh
 RUN chmod +x /usr/local/bin/railway-entrypoint.sh
