@@ -10,6 +10,10 @@ use App\Http\Controllers\ProductController;
 Route::get('/', [ProductController::class, 'index'])->name('home');
 Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show')->where('product', '[0-9]+');
 
+// Catégories publiques
+Route::get('/categories', [App\Http\Controllers\CategoryController::class, 'index'])->name('categories.index');
+Route::get('/categories/{category:slug}', [App\Http\Controllers\CategoryController::class, 'show'])->name('categories.show');
+
 /**
  * 🔒 Routes Authentifiées (nécessite connexion)
  */
@@ -74,6 +78,13 @@ Route::middleware([
     Route::get('/messages', [App\Http\Controllers\ConversationController::class, 'index'])->name('messages.index');
     Route::get('/messages/{product}/{user}', [App\Http\Controllers\ConversationController::class, 'show'])->name('messages.show');
     Route::post('/messages/{product}/{user}', [App\Http\Controllers\ConversationController::class, 'send'])->name('messages.send');
+
+    // Gestion des catégories (utilisateurs authentifiés)
+    Route::get('/categories/create', [App\Http\Controllers\CategoryController::class, 'create'])->name('categories.create');
+    Route::post('/categories', [App\Http\Controllers\CategoryController::class, 'store'])->name('categories.store');
+    Route::get('/categories/{category}/edit', [App\Http\Controllers\CategoryController::class, 'edit'])->name('categories.edit');
+    Route::put('/categories/{category}', [App\Http\Controllers\CategoryController::class, 'update'])->name('categories.update');
+    Route::delete('/categories/{category}', [App\Http\Controllers\CategoryController::class, 'destroy'])->name('categories.destroy')->middleware('role:admin');
 
     // CRUD complet des produits (sauf index et show déjà publics)
     Route::resource('products', ProductController::class)->except(['index', 'show']);

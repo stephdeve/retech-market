@@ -14,16 +14,23 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         $categories = [
-            ['name' => 'Laptops', 'slug' => 'laptops'],
             ['name' => 'Smartphones', 'slug' => 'smartphones'],
-            ['name' => 'Tablets', 'slug' => 'tablets'],
+            ['name' => 'Ordinateurs Portables', 'slug' => 'ordinateurs-portables'],
+            ['name' => 'Tablettes', 'slug' => 'tablettes'],
+            ['name' => 'Montres Connectées', 'slug' => 'montres-connectees'],
+            ['name' => 'Écouteurs & Audio', 'slug' => 'ecouteurs-audio'],
             ['name' => 'Accessoires', 'slug' => 'accessoires'],
-            ['name' => 'Gaming', 'slug' => 'gaming'],
-            ['name' => 'Audio', 'slug' => 'audio'],
+            ['name' => 'Consoles de Jeux', 'slug' => 'consoles-jeux'],
+            ['name' => 'PC de Bureau', 'slug' => 'pc-bureau'],
+            ['name' => 'Caméras & Photos', 'slug' => 'cameras-photos'],
+            ['name' => 'Drones', 'slug' => 'drones'],
         ];
 
         foreach ($categories as $category) {
-            Category::create($category);
+            Category::firstOrCreate(
+                ['slug' => $category['slug']],
+                $category
+            );
         }
     }
 }
