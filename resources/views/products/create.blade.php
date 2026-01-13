@@ -167,7 +167,7 @@
                             <div id="image-preview-container" class="hidden text-center w-full">
                                 <img id="image-preview" src="#" alt="Prévisualisation" class="mx-auto h-64 object-contain rounded-lg shadow-md mb-4 bg-white">
                                 <button type="button" id="remove-image" class="inline-flex items-center px-3 py-1 border border-transparent text-xs font-medium rounded-full text-red-700 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition">
-                                    ❌ Supprimer l'image
+                                     Supprimer l'image
                                 </button>
                             </div>
                         </div>
@@ -185,10 +185,10 @@
                         {{-- Tabs pour choisir Upload ou Lien --}}
                         <div class="flex space-x-2 mb-3">
                             <button type="button" @click="videoMode = 'upload'" :class="videoMode === 'upload' ? 'bg-purple-600 text-white' : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'" class="flex-1 px-4 py-2 rounded-lg text-sm font-medium transition">
-                                📤 Uploader un fichier
+                                 Uploader un fichier
                             </button>
                             <button type="button" @click="videoMode = 'link'" :class="videoMode === 'link' ? 'bg-purple-600 text-white' : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'" class="flex-1 px-4 py-2 rounded-lg text-sm font-medium transition">
-                                🔗 Lien externe
+                                Lien externe
                             </button>
                         </div>
 
@@ -211,7 +211,7 @@
                                     <video id="video-preview" class="mx-auto h-64 object-contain rounded-lg shadow-md mb-4 bg-black" controls></video>
                                     <p id="video-info" class="text-sm text-gray-600 dark:text-gray-400 mb-2"></p>
                                     <button type="button" id="remove-video" class="inline-flex items-center px-3 py-1 border border-transparent text-xs font-medium rounded-full text-red-700 bg-red-100 hover:bg-red-200 transition">
-                                        ❌ Supprimer la vidéo
+                                         Supprimer la vidéo
                                     </button>
                                 </div>
                             </div>
@@ -224,7 +224,7 @@
                         <div x-show="videoMode === 'link'" x-cloak>
                             <input type="text" name="video_url" value="{{ old('video_url') }}" placeholder="https://youtube.com/... ou https://tiktok.com/..." class="block w-full rounded-xl border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-purple-500 focus:ring-purple-500 py-3 px-4 shadow-sm placeholder-gray-400">
                             <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">
-                                ✅ Supports: YouTube, TikTok, Instagram Reels
+                                 Supports: YouTube, TikTok, Instagram Reels
                             </p>
                             @error('video_url')
                                 <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
@@ -238,7 +238,7 @@
                             Annuler
                         </a>
                         <button type="submit" class="inline-flex justify-center py-3 px-8 border border-transparent shadow-sm text-sm font-bold rounded-xl text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition transform hover:-translate-y-0.5">
-                            ✅ Publier l'annonce
+                            Publier l'annonce
                         </button>
                     </div>
                 </form>
@@ -276,7 +276,7 @@
             const file = e.target.files[0];
             if (file) {
                 if (!file.type.startsWith('image/')) {
-                    alert('❌ Veuillez sélectionner un fichier image valide.');
+                    alert(' Veuillez sélectionner un fichier image valide.');
                     resetPreview();
                     return;
                 }
@@ -301,7 +301,7 @@
 
             // Vérification du type
             if (!file.type.startsWith('video/')) {
-                alert('❌ Veuillez sélectionner un fichier vidéo valide (MP4 ou MOV).');
+                alert(' Veuillez sélectionner un fichier vidéo valide (MP4 ou MOV).');
                 input.value = '';
                 return;
             }
@@ -309,7 +309,7 @@
             // Vérification de la taille (15 Mo max)
             const maxSize = 15 * 1024 * 1024; // 15 Mo en bytes
             if (file.size > maxSize) {
-                alert('❌ La vidéo dépasse 15 Mo. Veuillez compresser votre fichier.');
+                alert(' La vidéo dépasse 15 Mo. Veuillez compresser votre fichier.');
                 input.value = '';
                 return;
             }
@@ -324,7 +324,7 @@
                 
                 // Vérification de la durée (2 minutes = 120 secondes max)
                 if (duration > 120) {
-                    alert('❌ La vidéo dépasse 2 minutes (' + Math.round(duration) + 's). Veuillez la raccourcir.');
+                    alert(' La vidéo dépasse 2 minutes (' + Math.round(duration) + 's). Veuillez la raccourcir.');
                     input.value = '';
                     return;
                 }

@@ -1,7 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-bold text-2xl text-gray-800 dark:text-gray-200 leading-tight">
-            ✏️ {{ __('Modifier l\'annonce') }}
+            <i class="fas fa-edit"></i>
+             {{ __('Modifier l\'annonce') }}
         </h2>
     </x-slot>
 
@@ -174,7 +175,7 @@
                             <div id="image-preview-container" class="hidden text-center w-full">
                                 <img id="image-preview" src="#" alt="Prévisualisation" class="mx-auto h-64 object-contain rounded-lg shadow-md mb-4 bg-white">
                                 <button type="button" id="remove-image" class="inline-flex items-center px-3 py-1 border border-transparent text-xs font-medium rounded-full text-red-700 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition">
-                                    ❌ Annuler le changement
+                                    <i class="fas fa-times mr-1"></i>Annuler le changement
                                 </button>
                             </div>
                         </div>
@@ -186,7 +187,8 @@
                     {{-- Vidéo Showcase (Style TikTok) --}}
                     <div x-data="{ videoMode: '{{ $product->video_path ? 'upload' : ($product->video_url ? 'link' : 'upload') }}' }">
                         <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-3">
-                            🎥 Vidéo Showcase <span class="text-xs font-normal text-gray-500">(Optionnel - Style TikTok/Reels)</span>
+                            <i class="fas fa-video mr-1"></i>
+                             Vidéo Showcase <span class="text-xs font-normal text-gray-500">(Optionnel - Style TikTok/Reels)</span>
                         </label>
                         
                         {{-- Vidéo actuelle si existe --}}
@@ -210,10 +212,10 @@
                         {{-- Tabs pour choisir Upload ou Lien --}}
                         <div class="flex space-x-2 mb-3">
                             <button type="button" @click="videoMode = 'upload'" :class="videoMode === 'upload' ? 'bg-purple-600 text-white' : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'" class="flex-1 px-4 py-2 rounded-lg text-sm font-medium transition">
-                                📤 Uploader un fichier
+                                <i class="fas fa-upload mr-1"></i> Uploader un fichier
                             </button>
                             <button type="button" @click="videoMode = 'link'" :class="videoMode === 'link' ? 'bg-purple-600 text-white' : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'" class="flex-1 px-4 py-2 rounded-lg text-sm font-medium transition">
-                                🔗 Lien externe
+                                <i class="fas fa-link mr-1"></i> Lien externe
                             </button>
                         </div>
 
@@ -236,7 +238,7 @@
                                     <video id="video-preview-edit" class="mx-auto h-64 object-contain rounded-lg shadow-md mb-4 bg-black" controls></video>
                                     <p id="video-info-edit" class="text-sm text-gray-600 dark:text-gray-400 mb-2"></p>
                                     <button type="button" id="remove-video-edit" class="inline-flex items-center px-3 py-1 border border-transparent text-xs font-medium rounded-full text-red-700 bg-red-100 hover:bg-red-200 transition">
-                                        ❌ Supprimer la vidéo
+                                        <i class="fas fa-times mr-1"></i> Supprimer la vidéo
                                     </button>
                                 </div>
                             </div>
@@ -249,7 +251,7 @@
                         <div x-show="videoMode === 'link'" x-cloak>
                             <input type="text" name="video_url" value="{{ old('video_url', $product->video_url) }}" placeholder="https://youtube.com/... ou https://tiktok.com/..." class="block w-full rounded-xl border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-purple-500 focus:ring-purple-500 py-3 px-4 shadow-sm placeholder-gray-400">
                             <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">
-                                ✅ Supports: YouTube, TikTok, Instagram Reels
+                                <i class="fas fa-check mr-1"></i> Supports: YouTube, TikTok, Instagram Reels
                             </p>
                             @error('video_url')
                                 <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
@@ -263,7 +265,7 @@
                             Annuler
                         </a>
                         <button type="submit" class="inline-flex justify-center py-3 px-8 border border-transparent shadow-sm text-sm font-bold rounded-xl text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 transition transform hover:-translate-y-0.5">
-                            💾 Enregistrer les modifications
+                            <i class="fas fa-save mr-1"></i> Enregistrer les modifications
                         </button>
                     </div>
                 </form>
@@ -301,7 +303,7 @@
             const file = e.target.files[0];
             if (file) {
                 if (!file.type.startsWith('image/')) {
-                    alert('❌ Veuillez sélectionner un fichier image valide.');
+                    alert(' Veuillez sélectionner un fichier image valide.');
                     resetPreview();
                     return;
                 }
@@ -325,14 +327,14 @@
             if (!file) return;
 
             if (!file.type.startsWith('video/')) {
-                alert('❌ Veuillez sélectionner un fichier vidéo valide (MP4 ou MOV).');
+                alert('Veuillez sélectionner un fichier vidéo valide (MP4 ou MOV).');
                 input.value = '';
                 return;
             }
 
             const maxSize = 15 * 1024 * 1024;
             if (file.size > maxSize) {
-                alert('❌ La vidéo dépasse 15 Mo. Veuillez compresser votre fichier.');
+                alert(' La vidéo dépasse 15 Mo. Veuillez compresser votre fichier.');
                 input.value = '';
                 return;
             }
@@ -345,7 +347,7 @@
                 const duration = videoEl.duration;
                 
                 if (duration > 120) {
-                    alert('❌ La vidéo dépasse 2 minutes (' + Math.round(duration) + 's). Veuillez la raccourcir.');
+                    alert('La vidéo dépasse 2 minutes (' + Math.round(duration) + 's). Veuillez la raccourcir.');
                     input.value = '';
                     return;
                 }
