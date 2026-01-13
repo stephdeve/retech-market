@@ -101,10 +101,16 @@ RUN php artisan vendor:publish --tag=livewire:assets --force
 COPY docker/railway-entrypoint.sh /usr/local/bin/railway-entrypoint.sh
 RUN chmod +x /usr/local/bin/railway-entrypoint.sh
 
+# Créer les répertoires storage nécessaires
+RUN mkdir -p storage/app/public/products/videos \
+    storage/framework/{cache,sessions,views} \
+    storage/logs \
+    bootstrap/cache
+
 # Permissions
 RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 755 /var/www/html/storage \
-    && chmod -R 755 /var/www/html/bootstrap/cache
+    && chmod -R 775 /var/www/html/storage \
+    && chmod -R 775 /var/www/html/bootstrap/cache
 
 # Créer le répertoire pour Nginx
 RUN mkdir -p /run/nginx

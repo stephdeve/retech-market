@@ -4,6 +4,21 @@ set -e
 
 echo "🚀 Starting ReTech Market on Railway..."
 
+# Create storage directories if they don't exist
+echo "📁 Creating storage directories..."
+mkdir -p storage/app/public/products
+mkdir -p storage/app/public/products/videos
+mkdir -p storage/framework/cache
+mkdir -p storage/framework/sessions
+mkdir -p storage/framework/views
+mkdir -p storage/logs
+mkdir -p bootstrap/cache
+
+# Set proper permissions
+echo "🔐 Setting permissions..."
+chmod -R 775 storage bootstrap/cache
+chown -R www-data:www-data storage bootstrap/cache 2>/dev/null || true
+
 # Generate APP_KEY if not set
 if [ -z "$APP_KEY" ] || [ "$APP_KEY" = "base64:CHANGEME" ]; then
     echo "⚠️  Generating APP_KEY..."
