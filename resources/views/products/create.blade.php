@@ -34,11 +34,11 @@
                                 @endforeach
                             </select>
                             <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-500">
-                                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                                <i class="fas fa-chevron-down text-sm"></i>
                             </div>
                         </div>
                         @error('category_id')
-                            <p class="mt-2 text-sm text-red-600 dark:text-red-400 flex items-center"><svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> {{ $message }}</p>
+                            <p class="mt-2 text-sm text-red-600 dark:text-red-400 flex items-center"><i class="fas fa-exclamation-circle mr-1"></i> {{ $message }}</p>
                         @enderror
                     </div>
 
@@ -51,7 +51,7 @@
                                placeholder="Ex: iPhone 13 Pro Max - 128 Go - Parfait état"
                                class="block w-full rounded-xl border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-blue-500 focus:ring-blue-500 py-3 px-4 shadow-sm placeholder-gray-400">
                         @error('name')
-                            <p class="mt-2 text-sm text-red-600 dark:text-red-400 flex items-center"><svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> {{ $message }}</p>
+                            <p class="mt-2 text-sm text-red-600 dark:text-red-400 flex items-center"><i class="fas fa-exclamation-circle mr-1"></i> {{ $message }}</p>
                         @enderror
                     </div>
 
@@ -112,7 +112,7 @@
                                    class="block w-full rounded-xl border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-blue-500 focus:ring-blue-500 py-3 pl-10 px-4 shadow-sm placeholder-gray-400">
                         </div>
                         @error('price')
-                            <p class="mt-2 text-sm text-red-600 dark:text-red-400 flex items-center"><svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> {{ $message }}</p>
+                            <p class="mt-2 text-sm text-red-600 dark:text-red-400 flex items-center"><i class="fas fa-exclamation-circle mr-1"></i> {{ $message }}</p>
                         @enderror
                         <p class="mt-1 text-xs text-gray-500" x-show="type === 'trade'">Le prix est optionnel pour une annonce en troc.</p>
                     </div>
@@ -139,7 +139,7 @@
                                   class="block w-full rounded-xl border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-blue-500 focus:ring-blue-500 py-3 px-4 shadow-sm placeholder-gray-400">{{ old('description') }}</textarea>
                         <p class="mt-2 text-xs text-gray-500 dark:text-gray-400 text-right">Minimum 20 caractères</p>
                         @error('description')
-                            <p class="mt-2 text-sm text-red-600 dark:text-red-400 flex items-center"><svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> {{ $message }}</p>
+                            <p class="mt-2 text-sm text-red-600 dark:text-red-400 flex items-center"><i class="fas fa-exclamation-circle mr-1"></i> {{ $message }}</p>
                         @enderror
                     </div>
 
@@ -150,9 +150,7 @@
                         </label>
                         <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 dark:border-gray-700 border-dashed rounded-xl hover:bg-gray-50 dark:hover:bg-gray-900/50 transition cursor-pointer relative" id="drop-zone">
                             <div class="space-y-1 text-center" id="upload-prompt">
-                                <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
-                                    <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
+                                <i class="fas fa-image mx-auto text-gray-400" style="font-size: 3rem;"></i>
                                 <div class="flex text-sm text-gray-600 dark:text-gray-400 justify-center">
                                     <label for="image" class="relative cursor-pointer rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none">
                                         <span>Télécharger une image</span>
@@ -174,7 +172,7 @@
                             </div>
                         </div>
                         @error('image')
-                            <p class="mt-2 text-sm text-red-600 dark:text-red-400 flex items-center"><svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> {{ $message }}</p>
+                            <p class="mt-2 text-sm text-red-600 dark:text-red-400 flex items-center"><i class="fas fa-exclamation-circle mr-1"></i> {{ $message }}</p>
                         @enderror
                     </div>
 
@@ -198,9 +196,7 @@
                         <div x-show="videoMode === 'upload'" x-cloak>
                             <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-purple-300 dark:border-purple-700 border-dashed rounded-xl hover:bg-purple-50 dark:hover:bg-purple-900/10 transition cursor-pointer" id="video-drop-zone">
                                 <div class="space-y-1 text-center" id="video-upload-prompt">
-                                    <svg class="mx-auto h-12 w-12 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
-                                    </svg>
+                                    <i class="fas fa-video mx-auto text-purple-400" style="font-size: 3rem;"></i>
                                     <div class="flex text-sm text-gray-600 dark:text-gray-400 justify-center">
                                         <label for="video" class="relative cursor-pointer rounded-md font-medium text-purple-600 hover:text-purple-500 focus-within:outline-none">
                                             <span>Télécharger une vidéo</span>
