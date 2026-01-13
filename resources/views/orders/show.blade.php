@@ -52,7 +52,7 @@
                                     </span>
                                     <span class="text-xl font-bold text-gray-600 dark:text-gray-400">
                                         @auth
-                                            {{ Auth::user()->currency }}
+                                            FCFA
                                         @endauth 
                                         @guest
                                             XOF

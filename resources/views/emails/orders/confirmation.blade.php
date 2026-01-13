@@ -5,7 +5,7 @@ Bonjour {{ $orders->first()->buyer->name }},
 
 Nous avons bien reçu votre paiement de **{{ number_format($total, 2) }}
                                                 @auth
-                                                   {{ Auth::user()->currency }}
+                                                   FCFA
                                                 @endauth 
                                                 @guest
                                                     XOF

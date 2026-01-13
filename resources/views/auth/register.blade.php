@@ -48,22 +48,6 @@
                     </div>
 
                     <div>
-                        <label for="currency" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                            Devise préférée
-                        </label>
-                        <div class="mt-1 relative rounded-md shadow-sm">
-                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                            </div>
-                            <select id="currency" name="currency" class="block w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-600 rounded-xl leading-5 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 sm:text-sm transition duration-150 ease-in-out">
-                                <option value="XOF">Franc CFA (XOF)</option>
-                                <option value="EUR">Euro (€)</option>
-                                <option value="USD">Dollar ($)</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div>
                         <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
                             Mot de passe
                         </label>

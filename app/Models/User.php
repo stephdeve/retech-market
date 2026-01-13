@@ -86,6 +86,15 @@ class User extends Authenticatable
     }
 
     /**
+     * Get the default values for attributes.
+     *
+     * @return array<string, mixed>
+     */
+    protected $attributes = [
+        'currency' => 'XOF',
+    ];
+
+    /**
      * Relation : Un utilisateur a plusieurs produits
      */
     /**

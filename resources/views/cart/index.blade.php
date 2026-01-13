@@ -48,7 +48,7 @@
                                                 <span class="text-2xl font-black bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
                                                     {{ number_format($details['price'], 0) }} 
                                                     @auth
-                                                        {{ Auth::user()->currency }}
+                                                        FCFA
                                                     @endauth 
                                                     @guest
                                                         XOF
@@ -84,7 +84,7 @@
                                         <span>Sous-total ({{ count($cartItems) }} article{{ count($cartItems) > 1 ? 's' : '' }})</span>
                                         <span class="font-semibold">{{ number_format($total, 0) }} 
                                             @auth
-                                                {{ Auth::user()->currency }}
+                                                FCFA
                                             @endauth 
                                             @guest
                                                 XOF
@@ -102,7 +102,7 @@
                                             <span class="text-3xl font-black bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
                                                 {{ number_format($total, 0) }} 
                                                 @auth
-                                                    {{ Auth::user()->currency }}
+                                                    FCFA
                                                 @endauth 
                                                 @guest
                                                     XOF

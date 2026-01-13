@@ -6,7 +6,7 @@ Votre annonce **{{ $product->name }}** a été publiée avec succès sur ReTech 
 <x-mail::panel>
 **Prix :** {{ number_format($product->price, 2) }} 
                                                 @auth
-                                                    {{ Auth::user()->currency }}
+                                                    FCFA
                                                 @endauth 
                                                 @guest
                                                     XOF

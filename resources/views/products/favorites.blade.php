@@ -52,7 +52,7 @@
                                     <span class="text-2xl font-black bg-gradient-to-r from-brand-600 to-purple-600 bg-clip-text text-transparent">
                                         {{ number_format($product->price, 0) }}
                                         @auth
-                                            {{ Auth::user()->currency }}
+                                            FCFA
                                         @endauth 
                                         @guest
                                             XOF

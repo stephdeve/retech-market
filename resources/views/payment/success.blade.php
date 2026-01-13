@@ -42,7 +42,7 @@
                                 <td class="px-6 py-4 text-right font-bold text-brand-600 dark:text-brand-400 text-lg">
                                     {{ number_format($total ?? $orders->sum('total_price'), 2) }}
                                     @auth
-                                        {{ Auth::user()->currency }}
+                                        FCFA
                                     @endauth 
                                     @guest
                                         XOF

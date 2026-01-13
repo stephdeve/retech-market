@@ -13,7 +13,7 @@
                     <p class="text-gray-600 dark:text-gray-400 mb-8">
                         Vous êtes sur le point de payer un total de <span class="font-bold text-blue-600 text-xl">{{ number_format($total, 2) }}
                                             @auth
-                                                {{ Auth::user()->currency }}
+                                                FCFA
                                             @endauth 
                                             @guest
                                                 XOF

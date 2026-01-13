@@ -130,7 +130,7 @@
                                         <span class="text-xl font-bold text-brand-600 dark:text-brand-400">
                                             {{ number_format($product->price, 0) }}
                                             @auth
-                                                {{ Auth::user()->currency }}
+                                                FCFA
                                             @endauth 
                                             @guest
                                                 XOF

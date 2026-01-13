@@ -57,18 +57,6 @@
             <x-label for="name" value="{{ __('Name') }}" />
             <x-input id="name" type="text" class="mt-1 block w-full" wire:model="state.name" required autocomplete="name" />
             <x-input-error for="name" class="mt-2" />
-        </div>
-
-        <!-- Currency -->
-        <div class="col-span-6 sm:col-span-4">
-            <x-label for="currency" value="{{ __('Devise préférée') }}" />
-            <select id="currency" wire:model="state.currency" class="mt-1 block w-full border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-300 focus:border-brand-500 dark:focus:border-brand-600 focus:ring-brand-500 dark:focus:ring-brand-600 rounded-md shadow-sm">
-                <option value="XOF">Franc CFA (XOF)</option>
-                <option value="EUR">Euro (€)</option>
-                <option value="USD">Dollar ($)</option>
-            </select>
-            <x-input-error for="currency" class="mt-2" />
-        </div>
 
         <!-- Phone -->
         <div class="col-span-6 sm:col-span-4">

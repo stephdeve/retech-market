@@ -67,7 +67,7 @@
                                             <span class="text-sm font-bold text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20 px-2.5 py-1 rounded-lg">
                                                 {{ number_format($order->total_price, 0) }}
                                                 @auth
-                                                    {{ Auth::user()->currency }}
+                                                    FCFA
                                                 @endauth 
                                                 @guest
                                                     XOF

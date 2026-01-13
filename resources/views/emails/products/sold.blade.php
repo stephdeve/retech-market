@@ -9,7 +9,7 @@ Félicitations ! Votre produit **{{ $order->product->name }}** vient d'être ach
 - **Produit :** {{ $order->product->name }}
 - **Prix de vente :** {{ number_format($order->total_price, 2) }}
                                             @auth
-                                                {{ Auth::user()->currency }}
+                                                FCFA
                                             @endauth 
                                             @guest
                                                 XOF
