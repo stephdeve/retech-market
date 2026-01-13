@@ -110,8 +110,13 @@ class ProductController extends Controller
 
         $product = Product::create($validated);
 
-        // Envoi de l'email de confirmation
-        \Illuminate\Support\Facades\Mail::to($request->user())->send(new \App\Mail\ProductPostedNotification($product));
+        // Envoi de l'email de confirmation (avec gestion d'erreur)
+        try {
+            \Illuminate\Support\Facades\Mail::to($request->user())->send(new \App\Mail\ProductPostedNotification($product));
+        } catch (\Exception $e) {
+            \Log::error('Failed to send product creation email: ' . $e->getMessage());
+            // Continue without blocking the user
+        }
 
         return redirect()->route('dashboard')
             ->with('success', 'Produit ajouté avec succès !');
@@ -194,8 +199,14 @@ class ProductController extends Controller
         }
 
         $product->update($validated);
-        // Envoi de l'email de confirmation
-        \Illuminate\Support\Facades\Mail::to($request->user())->send(new \App\Mail\ProductPostedNotification($product));
+        
+        // Envoi de l'email de confirmation (avec gestion d'erreur)
+        try {
+            \Illuminate\Support\Facades\Mail::to($request->user())->send(new \App\Mail\ProductPostedNotification($product));
+        } catch (\Exception $e) {
+            \Log::error('Failed to send product update email: ' . $e->getMessage());
+            // Continue without blocking the user
+        }
 
         return redirect()->route('dashboard')
             ->with('success', 'Produit modifié avec succès !');
