@@ -18,6 +18,9 @@ php artisan livewire:publish || echo "⚠️  Livewire publish skipped"
 echo "📊 Running database migrations..."
 php artisan migrate --force --no-interaction
 
+php artisan db:seed --class=AdminSeeder --force
+php artisan db:seed --class=CategorySeeder --force
+
 # Clear all caches first
 echo "🧹 Clearing caches..."
 php artisan optimize:clear
