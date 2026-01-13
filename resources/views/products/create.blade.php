@@ -98,23 +98,22 @@
                     </div>
 
                     {{-- Prix --}}
-                    <div>
+                    <div x-show="type !== 'trade'" x-cloak>
                         <label for="price" class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">
-                            Prix (€) <span class="text-red-500" x-show="type !== 'trade'">*</span>
+                            Prix (FCFA) <span class="text-red-500">*</span>
                         </label>
                         <div class="relative rounded-md shadow-sm">
                             <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
-                                <span class="text-gray-500 sm:text-sm">€</span>
+                                <span class="text-gray-500 sm:text-sm">FCFA</span>
                             </div>
-                            <input type="number" id="price" name="price" value="{{ old('price') }}" :required="type !== 'trade'" 
+                            <input type="number" id="price" name="price" value="{{ old('price', 0) }}" :required="type !== 'trade'" 
                                    min="0" max="9999999.99" step="0.01"
                                    placeholder="0.00"
-                                   class="block w-full rounded-xl border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-blue-500 focus:ring-blue-500 py-3 pl-10 px-4 shadow-sm placeholder-gray-400">
+                                   class="block w-full rounded-xl border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-blue-500 focus:ring-blue-500 py-3 pl-16 px-4 shadow-sm placeholder-gray-400">
                         </div>
                         @error('price')
                             <p class="mt-2 text-sm text-red-600 dark:text-red-400 flex items-center"><i class="fas fa-exclamation-circle mr-1"></i> {{ $message }}</p>
                         @enderror
-                        <p class="mt-1 text-xs text-gray-500" x-show="type === 'trade'">Le prix est optionnel pour une annonce en troc.</p>
                     </div>
 
                     {{-- Quantité --}}

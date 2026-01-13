@@ -98,22 +98,21 @@
                     </div>
 
                     {{-- Prix --}}
-                    <div>
+                    <div x-show="type !== 'trade'" x-cloak>
                         <label for="price" class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">
-                            Prix (€) <span class="text-red-500" x-show="type !== 'trade'">*</span>
+                            Prix (FCFA) <span class="text-red-500">*</span>
                         </label>
                         <div class="relative rounded-md shadow-sm">
                             <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
-                                <span class="text-gray-500 sm:text-sm">€</span>
+                                <span class="text-gray-500 sm:text-sm">FCFA</span>
                             </div>
                             <input type="number" id="price" name="price" value="{{ old('price', $product->price) }}" :required="type !== 'trade'" 
                                    min="0" max="9999999.99" step="0.01"
-                                   class="block w-full rounded-xl border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-yellow-500 focus:ring-yellow-500 py-3 pl-10 px-4 shadow-sm">
+                                   class="block w-full rounded-xl border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-yellow-500 focus:ring-yellow-500 py-3 pl-16 px-4 shadow-sm">
                         </div>
                         @error('price')
                             <p class="mt-2 text-sm text-red-600 dark:text-red-400 flex items-center"><i class="fas fa-exclamation-circle mr-1"></i> {{ $message }}</p>
                         @enderror
-                        <p class="mt-1 text-xs text-gray-500" x-show="type === 'trade'">Le prix est optionnel pour une annonce en troc.</p>
                     </div>
 
                     {{-- Quantité --}}
