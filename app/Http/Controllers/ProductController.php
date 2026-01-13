@@ -159,18 +159,26 @@ class ProductController extends Controller
 
         // Si une nouvelle image est uploadée
         if ($request->hasFile('image')) {
-            // Supprime l'ancienne image
+            // Supprime l'ancienne image (avec gestion d'erreur)
             if ($product->image_path) {
-                Storage::disk('public')->delete($product->image_path);
+                try {
+                    Storage::disk('public')->delete($product->image_path);
+                } catch (\Exception $e) {
+                    \Log::warning('Failed to delete old product image: ' . $e->getMessage());
+                }
             }
             $validated['image_path'] = $request->file('image')->store('products', 'public');
         }
 
         // Si une nouvelle vidéo est uploadée
         if ($request->hasFile('video')) {
-            // Supprime l'ancienne vidéo
+            // Supprime l'ancienne vidéo (avec gestion d'erreur)
             if ($product->video_path) {
-                Storage::disk('public')->delete($product->video_path);
+                try {
+                    Storage::disk('public')->delete($product->video_path);
+                } catch (\Exception $e) {
+                    \Log::warning('Failed to delete old product video: ' . $e->getMessage());
+                }
             }
             $validated['video_path'] = $request->file('video')->store('products/videos', 'public');
         }
@@ -198,12 +206,24 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        // Vérifie que l'utilisateur est bien le propriétaire (via Policy)
-        Gate::authorize('delete', $product);
+        // Authorization
+        $this->authorize('delete', $product);
 
-        // Supprime l'image du serveur si elle existe
+        // Suppression des fichiers (avec gestion d'erreur)
         if ($product->image_path) {
-            Storage::disk('public')->delete($product->image_path);
+            try {
+                Storage::disk('public')->delete($product->image_path);
+            } catch (\Exception $e) {
+                \Log::warning('Failed to delete product image: ' . $e->getMessage());
+            }
+        }
+
+        if ($product->video_path) {
+            try {
+                Storage::disk('public')->delete($product->video_path);
+            } catch (\Exception $e) {
+                \Log::warning('Failed to delete product video: ' . $e->getMessage());
+            }
         }
 
         $product->delete();
