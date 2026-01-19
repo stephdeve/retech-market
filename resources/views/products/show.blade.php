@@ -39,7 +39,7 @@
                                      class="w-full h-full object-contain p-8 group-hover:scale-105 transition-transform duration-700 ease-out">
                             @else
                                 <div class="text-center">
-                                    <div class="text-gray-300 dark:text-gray-600 text-9xl mb-4">📦</div>
+                                    <div class="text-gray-300 dark:text-gray-600 text-9xl mb-4"></div>
                                     <p class="text-gray-400 text-sm uppercase tracking-wide font-semibold">Aucune image disponible</p>
                                 </div>
                             @endif
@@ -60,11 +60,12 @@
                                 <div class="absolute top-4 right-4">
                                     @if($product->quantity === 0)
                                         <span class="inline-flex items-center px-3 py-1.5 rounded-xl text-xs font-bold bg-gray-900/80 dark:bg-gray-100/80 text-white dark:text-gray-900 backdrop-blur-sm border border-white/20">
-                                            ❌ Épuisé
+                                             Épuisé
                                         </span>
                                     @elseif($product->quantity === 1)
                                         <span class="inline-flex items-center px-3 py-1.5 rounded-xl text-xs font-bold bg-orange-500/90 text-white backdrop-blur-sm border border-white/20 animate-pulse">
-                                            ⚠️ Dernier exemplaire
+                                            
+                                            Dernier exemplaire
                                         </span>
                                     @else
                                         <span class="inline-flex items-center px-3 py-1.5 rounded-xl text-xs font-bold bg-green-500/90 text-white backdrop-blur-sm border border-white/20">
@@ -145,10 +146,10 @@
                             </div>
                             <div class="flex flex-wrap gap-2">
                                 @if(in_array($product->transaction_type ?? 'sale', ['sale','both']))
-                                    <span class="badge-success">🟢 Vente</span>
+                                    <span class="badge-success"> Vente</span>
                                 @endif
                                 @if(in_array($product->transaction_type ?? 'sale', ['trade','both']))
-                                    <span class="badge-primary">🔄 Troc accepté</span>
+                                    <span class="badge-primary"> Troc accepté</span>
                                 @endif
                                 @if(!empty($product->city))
                                     <span class="badge bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300">📍 {{ $product->city }}</span>
@@ -198,7 +199,7 @@
                                         </svg>
                                         Modifier l'annonce
                                     </a>
-                                    <form action="{{ route('products.destroy', $product) }}" method="POST" onsubmit="return confirm('⚠️ Êtes-vous sûr de vouloir supprimer cette annonce ?')">
+                                    <form action="{{ route('products.destroy', $product) }}" method="POST" onsubmit="return confirm(' Êtes-vous sûr de vouloir supprimer cette annonce ?')">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn-danger w-full">
