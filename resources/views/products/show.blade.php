@@ -152,7 +152,7 @@
                                     <span class="badge-primary"> Troc accepté</span>
                                 @endif
                                 @if(!empty($product->city))
-                                    <span class="badge bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300">📍 {{ $product->city }}</span>
+                                    <span class="badge bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300"> {{ $product->city }}</span>
                                 @endif
                             </div>
                         </div>
