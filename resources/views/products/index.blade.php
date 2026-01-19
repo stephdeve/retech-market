@@ -77,7 +77,7 @@
                                          alt="{{ $product->name }}" 
                                          class="w-full h-full object-cover object-center transform group-hover:scale-110 transition-transform duration-700 ease-out">
                                 @else
-                                    <div class="w-full h-full flex items-center justify-center text-5xl">📦</div>
+                                    <div class="w-full h-full flex items-center justify-center text-5xl"></div>
                                 @endif
                                 
                                 {{-- Badge catégorie flottant --}}
@@ -89,21 +89,21 @@
                                 {{-- Badges transaction & stock --}}
                                 <div class="absolute top-4 right-4 space-x-2 text-right">
                                     @if(in_array($product->transaction_type ?? 'sale', ['sale','both']))
-                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-green-100 text-green-700 border border-green-200">🟢 Vente</span>
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-green-100 text-green-700 border border-green-200"> Vente</span>
                                     @endif
                                     @if(in_array($product->transaction_type ?? 'sale', ['trade','both']))
-                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-blue-100 text-blue-700 border border-blue-200">🔄 Troc accepté</span>
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-blue-100 text-blue-700 border border-blue-200"> Troc accepté</span>
                                     @endif
                                     @if(isset($product->quantity) && $product->quantity === 1)
-                                        <div><span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-orange-100 text-orange-800 border border-orange-200">⚠️ Dernier exemplaire !</span></div>
+                                        <div><span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-orange-100 text-orange-800 border border-orange-200"> Dernier exemplaire !</span></div>
                                     @endif
                                     @if(isset($product->quantity) && $product->quantity === 0)
-                                        <div><span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-gray-200 text-gray-800 border border-gray-300">❌ Épuisé</span></div>
+                                        <div><span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-gray-200 text-gray-800 border border-gray-300"> Épuisé</span></div>
                                     @endif
                                 </div>
                                 @if(isset($product->quantity) && $product->quantity === 0)
                                     <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
-                                        <span class="px-3 py-1 rounded-lg text-xs font-semibold bg-white/90 text-gray-900">❌ Épuisé</span>
+                                        <span class="px-3 py-1 rounded-lg text-xs font-semibold bg-white/90 text-gray-900"> Épuisé</span>
                                     </div>
                                 @endif
                             </div>
@@ -117,7 +117,7 @@
                                 </h3>
                                 {{-- Localisation --}}
                                 @if(!empty($product->city))
-                                    <p class="text-xs text-gray-500 dark:text-gray-400 mb-2">📍 {{ $product->city }}</p>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400 mb-2"> {{ $product->city }}</p>
                                 @endif
                                 <p class="text-sm text-gray-500 dark:text-gray-400 line-clamp-2 mb-4 flex-1">
                                     {{ $product->description }}
